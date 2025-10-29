@@ -1,4 +1,4 @@
-name: 打包并输出到preview分支进行预览
+name: 打包并输出到page分支进行预览
 on:
   push:
     branches:
@@ -27,12 +27,12 @@ jobs:
         run: npm install
 
       - name: 打包
-        run: pnpm build
+        run: npm build
 
       - name: 部署到preview分支
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.ACCESS_TOKEN }}
           publish_dir: ./dist
           publish_branch: page
           full_commit_message: ${{ github.event.head_commit.message }}
